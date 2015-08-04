@@ -65,7 +65,6 @@ public class M3TPlayer {
 		this.library = new Library();
 		this.playerInteraction = playerInteraction;
 
-		this.library.importMusic(MusicParser.getFormattedMusicFromPath("c.mp3"));
 		this.library.importMusic(MusicParser.getFormattedMusicFromPath("b.mp3"));
 		this.library.importMusic(MusicParser.getFormattedMusicFromPath("a.mp3"));
 
