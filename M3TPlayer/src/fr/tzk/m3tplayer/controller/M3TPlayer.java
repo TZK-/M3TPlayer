@@ -12,7 +12,6 @@ import fr.tzk.m3tplayer.enumerations.PlayerAction;
 import fr.tzk.m3tplayer.interfaces.PlayerInteraction;
 import fr.tzk.m3tplayer.model.Library;
 import fr.tzk.m3tplayer.model.Music;
-import fr.tzk.m3tplayer.utils.MusicParser;
 
 /**
  * This class is a wrapper of JLayer Javazoom AdavancedPlayer.
@@ -64,9 +63,6 @@ public class M3TPlayer {
 		this.thread = null;
 		this.library = new Library();
 		this.playerInteraction = playerInteraction;
-
-		this.library.importMusic(MusicParser.getFormattedMusicFromPath("b.mp3"));
-		this.library.importMusic(MusicParser.getFormattedMusicFromPath("a.mp3"));
 
 		this.isPlaying = false;
 
