@@ -2,8 +2,6 @@ package fr.tzk.m3tplayer.model;
 
 import java.io.File;
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +26,6 @@ public class Library implements Serializable {
 	public Library() {
 		this.listMusic = new ArrayList<>();
 
-
 		if (LIB_FILE.exists()) {
 			Library lib = (Library) SerializationHelper.deserialize(LIB_FILE);
 			this.listMusic = lib.listMusic;
@@ -43,46 +40,57 @@ public class Library implements Serializable {
 	}
 
 	/**
-	 * Returns the Music object (stored into the ArrayList) by given its path
-	 * 
-	 * @param path
-	 *            the path
-	 * @return the Music object, or <tt>null</tt> if the path does not match
-	 *         with a Music
-	 */
-	public Music getMusicFromPath(String path) {
-		File file = new File(path);
-		URL url = null;
-		try {
-			url = new URL(file.toURI().toURL(), path);
-			for (Music music : this.listMusic) {
-				if (music.getFile().toURI().toURL().equals(url))
-					return music;
-			}
-		} catch (MalformedURLException e) {
-			return null;
-		}
-
-		return null;
-	}
-
-	/**
-	 * Imports a given music into the library
+	 * Imports a given music into the library only if the file exists.
 	 *
 	 * @param music
 	 *            the music to import
 	 */
 	public void importMusic(Music music) {
-		this.listMusic.add(music);
+		if (music != null && music.getFile().exists())
+			this.listMusic.add(music);
 	}
 
 	/**
 	 * Removes a given music from the library
 	 *
 	 * @param music
+	 *            the music to remove
 	 */
 	public void removeMusic(Music music) {
 		this.listMusic.remove(music);
+	}
+
+	/**
+	 * Returns the music which matches with a given index
+	 * 
+	 * @param index
+	 *            the index
+	 * @return the music or <tt>null</tt> if there has been an error
+	 */
+	public Music getMusic(int index) {
+		try {
+			return this.listMusic.get(index);
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+
+	/**
+	 * Returns the music's index stored in the list
+	 * 
+	 * @param music
+	 *            the music
+	 * @return the music's index
+	 */
+	public int getMusicIndex(Music music) {
+		return this.listMusic.indexOf(music);
+	}
+
+	/**
+	 * @return the library size (i.e the number of imported musics)
+	 */
+	public int getLibrarySize() {
+		return this.listMusic.size();
 	}
 
 	/**

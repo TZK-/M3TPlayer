@@ -16,7 +16,7 @@ public class Music implements Serializable {
 	/**
 	 * The file path
 	 */
-	private final File path;
+	private final File file;
 
 	/**
 	 * The title
@@ -70,7 +70,7 @@ public class Music implements Serializable {
 	 *            the album
 	 */
 	public Music(String path, String title, String artist, String album, int lenght) {
-		this.path = new File(path);
+		this.file = new File(path);
 		this.title = title;
 		this.artist = artist;
 		this.album = album;
@@ -82,7 +82,7 @@ public class Music implements Serializable {
 	 * @return the file
 	 */
 	public File getFile() {
-		return this.path;
+		return this.file;
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class Music implements Serializable {
 		result = prime * result + ((this.album == null) ? 0 : this.album.hashCode());
 		result = prime * result + ((this.artist == null) ? 0 : this.artist.hashCode());
 		result = prime * result + this.lenght;
-		result = prime * result + ((this.path == null) ? 0 : this.path.hashCode());
+		result = prime * result + ((this.file == null) ? 0 : this.file.hashCode());
 		result = prime * result + this.rating;
 		result = prime * result + ((this.title == null) ? 0 : this.title.hashCode());
 		return result;
@@ -186,10 +186,10 @@ public class Music implements Serializable {
 			return false;
 		if (this.lenght != other.lenght)
 			return false;
-		if (this.path == null) {
-			if (other.path != null)
+		if (this.file == null) {
+			if (other.file != null)
 				return false;
-		} else if (!this.path.equals(other.path))
+		} else if (!this.file.equals(other.file))
 			return false;
 		if (this.rating != other.rating)
 			return false;
@@ -203,7 +203,7 @@ public class Music implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Music [path=" + this.path + ", title=" + this.title + ", artist=" + this.artist + ", album="
+		return "Music [path=" + this.file + ", title=" + this.title + ", artist=" + this.artist + ", album="
 				+ this.album + ", rating=" + this.rating + ", lenght=" + this.lenght + "]";
 	}
 
