@@ -1,5 +1,8 @@
 package fr.tzk.m3tplayer.view;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -35,6 +38,15 @@ public class MainFrame extends JFrame implements Runnable, PlayerInteraction {
 		this.setTitle(APP_NAME);
 		this.setSize(800, 600);
 
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				super.windowClosing(e);
+				MainFrame.this.player.getLibrary().save();
+			}
+
+		});
+
 		JPanel root = new JPanel();
 		root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
 		JScrollPane scrollPane = new JScrollPane(this.musicTable);
@@ -60,4 +72,5 @@ public class MainFrame extends JFrame implements Runnable, PlayerInteraction {
 		else
 			this.setTitle(M3TPlayer.APP_NAME + " | " + music.getTitle());
 	}
+
 }
